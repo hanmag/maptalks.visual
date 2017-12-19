@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>visualize demo</title>
+    <link type="text/css" rel="stylesheet" href="./css/maptalks.css" />
+    <style>
+        html,
+        body,
+        #map {
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+            background: #111;
+        }
+
+    </style>
+    <script type="text/javascript" src="./lib/maptalks.min.js"></script>
+    <script type="text/javascript" src="./lib/three.min.js"></script>
+    <script type="text/javascript" src="./lib/maptalks.three.js"></script>
+    <script type="text/javascript" src='./lib/mapbox-gl.js'></script>
+    <script type="text/javascript" src="./lib/maptalks.mapboxgl.js"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1Ijoid2FuZ2p1ZTExOTkiLCJhIjoiY2l3NzJsMXZ6MDA1MDJvcGVvOXZ5aGtxNiJ9.6Md6VaUCF6RJPQT5d95Lhw';
+
+        const baseLayer = new maptalks.MapboxglLayer('tile', {
+            glOptions: {
+                'style': 'mapbox://styles/wangjue1199/cj82fhtai9j572rqs7rwk6ii4'
+            }
+        });
+
+        const map = new maptalks.Map("map", {
+            center: [-73.996927, 40.7085877],
+            zoom: 14,
+            pitch: 54.9,
+            maxPitch: 60,
+            baseLayer: baseLayer
+        });
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const features = JSON.parse(this.responseText);
+
+                // the ThreeLayer to draw buildings
+                const threeLayer = new maptalks.ThreeLayer('t', {
+                    forceRenderOnMoving: true,
+                    forceRenderOnRotating: true,
+                    forceRenderOnZooming: true
+                });
+
+                threeLayer.prepareToDraw = function (gl, scene, camera) {
+                    const me = this;
+                    const light = new THREE.PointLight(0xffffff);
+                    camera.add(light);
+
+                    features.forEach(function (g) {
+                        const heightPerLevel = 10;
+
+                        const m = new THREE.MeshPhongMaterial({
+                            color: 0x44777f,
+                            opacity: 0.9
+                        });
+
+                        g.type = 'Feature';
+                        g.geometry = {};
+                        g.geometry.type = 'Polygon';
+                        g.geometry.coordinates = [g.polygon];
+                        const geo = maptalks.GeoJSON.toGeometry(g);
+                        const mesh = me.toExtrudeMesh(geo, g.height, m, true);
+                        if (Array.isArray(mesh)) {
+                            scene.add.apply(scene, mesh);
+                        } else {
+                            scene.add(mesh);
+                        }
+                    });
+                    map.setPitch(55);
+                };
+                threeLayer.addTo(map);
+            }
+        };
+        xhttp.open("GET", "./data/deck_buildings.json", true);
+        xhttp.send();
+
+    </script>
+</body>
+
+</html>
