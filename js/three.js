@@ -7,13 +7,14 @@ const threeLayer = new maptalks.ThreeLayer('t', {
 
 function mockMaterials() {
     var materials = [];
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 5; i++) {
         var loader = new THREE.TextureLoader();
         var texture = loader.load("./textures/" + i + ".jpg");
-        texture.wrapS = texture.wrapS = THREE.RepeatWrapping;
-        texture.repeat.set(0.008, 0.008, 0.008);
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(0.0005, 0.002);
         var m = new THREE.MeshPhongMaterial({
-            map: texture
+            map: texture,
+            opacity: 0.9
         });
         materials.push(m);
     }
@@ -38,8 +39,7 @@ xhttp.onreadystatechange = function () {
                 //     opacity: 0.9
                 // });
 
-                const m = [materials[Math.floor(Math.random() * 20)], materials[Math.floor(20 +
-                    Math.random() * 10)]];
+                const m = [materials[0], materials[Math.floor(Math.random() * materials.length)]];
 
                 g.type = 'Feature';
                 g.geometry = {
