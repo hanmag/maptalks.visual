@@ -19,6 +19,9 @@
     <script type="text/javascript" src="./lib/maptalks.three.js"></script>
     <script type="text/javascript" src='./lib/mapbox-gl.js'></script>
     <script type="text/javascript" src="./lib/maptalks.mapboxgl.js"></script>
+    <script type="text/javascript" src="./lib/maptalks.odline.js"></script>
+    <script type="text/javascript" src="https://threejs.org/examples/js/loaders/AssimpJSONLoader.js"></script>
+
 </head>
 
 <body>
@@ -35,11 +38,32 @@
 
         const map = new maptalks.Map("map", {
             center: [-73.996927, 40.7085877],
-            zoom: 14,
+            zoom: 16,
             pitch: 54.9,
             maxPitch: 60,
             baseLayer: baseLayer
         });
+
+        // var arr = [];
+        // var lastc;
+        // map.addEventListener('click', function (e) {
+        //     console.info(e.coordinate);
+        //     if (lastc) {
+        //         arr.push({
+        //             "coordinates": [
+        //                 [lastc.x, lastc.y],
+        //                 [e.coordinate.x, e.coordinate.y]
+        //             ],
+        //             'symbol': {
+
+        //             }
+        //         }, );
+        //         lastc = e.coordinate;
+        //     } else {
+        //         lastc = e.coordinate;
+        //     }
+        // })
+       
     </script>
 
     <script type="text/javascript" src="./js/three.js"></script>
