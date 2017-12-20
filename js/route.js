@@ -307,26 +307,39 @@
 //     'trail': 80,
 // }).addTo(map);
 
+function getColor() {
+    var i = Math.random() * 3;
+    if (i < 1) {
+        return '#33ff33';
+    } else if (i < 2) {
+        return '#cc0000';
+    } else {
+        return '#ffcc00';
+    }
+}
+
 const xhttp2 = new XMLHttpRequest();
 xhttp2.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         const features = JSON.parse(this.responseText);
         var warr = [];
         features.features.forEach(function (g) {
+            var arr = [];
             for (var i = 0; i < g.geometry.coordinates.length - 1; i++) {
-                warr.push({
+                arr.push({
                     "coordinates": [
                         g.geometry.coordinates[i], g.geometry.coordinates[i + 1]
                     ],
                     'symbol': {
-                        'lineColor': '#ff3333'
+                        'lineColor': getColor()
                     }
                 });
             }
+            warr.push(arr);
         });
         var odlayer = new maptalks.ODLineLayer('od', warr, {
                 'animation': false,
-                'curveness': 0,
+                // 'curveness': 0,
                 'globalCompositeOperation': 'lighter',
                 'symbol': {
                     'lineWidth': 2,
@@ -336,10 +349,10 @@ xhttp2.onreadystatechange = function () {
             .addTo(map);
 
         var clayer = new maptalks.ODLineLayer('c', warr, {
-            'animationDuration': 1500,
+            'animationDuration': 200,
             'animation': true,
             'fps': 5,
-            'curveness': 0,
+            // 'curveness': 0,
             'random': true,
             'trail': 25,
         }).addTo(map);
