@@ -5,7 +5,7 @@ const threeLayer = new maptalks.ThreeLayer('t', {
     forceRenderOnZooming: true
 });
 
-function mockMaterials() {
+const materials = (function () {
     var materials = [];
     for (var i = 0; i < 5; i++) {
         var loader = new THREE.TextureLoader();
@@ -19,7 +19,7 @@ function mockMaterials() {
         materials.push(m);
     }
     return materials;
-}
+})();
 
 const xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -30,8 +30,6 @@ xhttp.onreadystatechange = function () {
             const me = this;
             const light = new THREE.PointLight(0xffffff);
             camera.add(light);
-
-            let materials = mockMaterials();
 
             features.forEach(function (g) {
                 // const m = new THREE.MeshPhongMaterial({
@@ -60,4 +58,6 @@ xhttp.onreadystatechange = function () {
     }
 };
 xhttp.open("GET", "./data/deck_buildings.json", true);
-xhttp.send();
+setTimeout(() => {
+    xhttp.send();
+}, 3000);
