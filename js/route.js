@@ -310,7 +310,7 @@
 function getColor() {
     var i = Math.random() * 3;
     if (i < 1) {
-        return '#33ff33';
+        return '#ff9900';
     } else if (i < 2) {
         return '#cc0000';
     } else {
@@ -338,20 +338,50 @@ xhttp2.onreadystatechange = function () {
             warr.push(arr);
         });
         var odlayer = new maptalks.ODLineLayer('od', warr, {
-                'animation': false,
-                // 'curveness': 0,
-                'globalCompositeOperation': 'lighter',
-                'symbol': {
-                    'lineWidth': 2,
-                    'lineColor': 'rgba(255,153,51, 0.2)',
-                },
-            })
-            .addTo(map);
+            'animation': false,
+            // 'curveness': 0,
+            'globalCompositeOperation': 'lighter',
+            'symbol': {
+                'lineWidth': 2,
+                'lineColor': 'rgba(255,153,51, 0.2)',
+            },
+        }).addTo(map);
+
+        // var clayer = new maptalks.ODLineLayer('c', warr, {
+        //     'animationDuration': 200,
+        //     'animation': true,
+        //     // 'curveness': 0,
+        //     'random': true,
+        //     'trail': 25,
+        // }).addTo(map);
+    }
+
+};
+
+
+const xhttp3 = new XMLHttpRequest();
+xhttp3.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        const features = JSON.parse(this.responseText);
+        var warr = [];
+        features.forEach(function (g) {
+            var arr = [];
+            for (var i = 0; i < g.segments.length - 1; i++) {
+                arr.push({
+                    "coordinates": [
+                        g.segments[i], g.segments[i + 1]
+                    ],
+                    'symbol': {
+                        'lineColor': getColor()
+                    }
+                });
+            }
+            warr.push(arr);
+        });
 
         var clayer = new maptalks.ODLineLayer('c', warr, {
             'animationDuration': 200,
             'animation': true,
-            'fps': 5,
             // 'curveness': 0,
             'random': true,
             'trail': 25,
@@ -359,5 +389,8 @@ xhttp2.onreadystatechange = function () {
     }
 
 };
+
 xhttp2.open("GET", "./data/deck_roads.json", true);
 xhttp2.send();
+xhttp3.open("GET", "./data/deck_trips.json", true);
+xhttp3.send();
