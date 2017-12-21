@@ -36,37 +36,35 @@
         });
 
         const map = new maptalks.Map("map", {
-            center: [-73.996927, 40.7085877],
-            zoom: 16,
-            pitch: 54.9,
+            center: [-73.997927, 40.7085877],
+            zoom: 14,
+            pitch: 55,
             maxPitch: 60,
             baseLayer: baseLayer
         });
 
-        // var arr = [];
-        // var lastc;
-        // map.addEventListener('click', function (e) {
-        //     console.info(e.coordinate);
-        //     if (lastc) {
-        //         arr.push({
-        //             "coordinates": [
-        //                 [lastc.x, lastc.y],
-        //                 [e.coordinate.x, e.coordinate.y]
-        //             ],
-        //             'symbol': {
+        document.addEventListener('keydown', function (e) {
+            console.info(e);
+            if (e.code === 'Space') {
+                map.animateTo({
+                    center: [-73.999927, 40.7085877],
+                    zoom: 16,
+                    pitch: 55,
+                    bearing: -60
+                }, {
+                    duration: 20000
+                });
+            }
+        });
 
-        //             }
-        //         }, );
-        //         lastc = e.coordinate;
-        //     } else {
-        //         lastc = e.coordinate;
-        //     }
-        // })
-       
+        setTimeout(() => {
+            loadBuildings();
+        }, 2000);
     </script>
 
+    <!-- <script type="text/javascript" src="./js/route.js"></script> -->
     <script type="text/javascript" src="./js/three.js"></script>
-    <script type="text/javascript" src="./js/route.js"></script>
+    <script type="text/javascript" src="./js/building.js"></script>
 </body>
 
 </html>
