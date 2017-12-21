@@ -42,8 +42,7 @@ xhttp.onreadystatechange = function () {
     }
 };
 
-xhttp.open("GET", "./data/deck_buildings.json", true);
-
 function loadBuildings() {
+    xhttp.open("GET", "./data/deck_buildings.json", true);
     xhttp.send();
 }

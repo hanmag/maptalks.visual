@@ -20,17 +20,13 @@ xhttp2.onreadystatechange = function () {
                 'type': 0
             }]);
         });
-        new maptalks.BigLineLayer('2013', warr, {
-            'blur': 2
-        }).setStyle([{
-            filter: true,
+        new maptalks.BigLineLayer('2013', warr, {}).setStyle([{
             symbol: {
-                lineColor: 'rgba(255,153,51, 0.4)',
+                lineColor: 'rgba(66,63,45, 0.1)',
                 lineWidth: 2
             }
-        }]).addTo(map);
+        }]).addTo(map).bringToBack();
     }
-
 };
 
 
@@ -65,7 +61,9 @@ xhttp3.onreadystatechange = function () {
 
 };
 
-xhttp2.open("GET", "./data/deck_roads.json", true);
-xhttp2.send();
-xhttp3.open("GET", "./data/deck_trips.json", true);
-xhttp3.send();
+function loadRoutes() {
+    xhttp2.open("GET", "./data/deck_roads.json", true);
+    xhttp2.send();
+    xhttp3.open("GET", "./data/deck_trips.json", true);
+    xhttp3.send();
+}
