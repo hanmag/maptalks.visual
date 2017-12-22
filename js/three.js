@@ -11,12 +11,10 @@ window.animationLoop = () => {
     animations.forEach(anim => {
         anim.call();
     });
+    threeLayer.renderScene();
 }
 
-let SCENE = null;
-
 threeLayer.prepareToDraw = function (gl, scene, camera) {
-    SCENE = scene;
     const light = new THREE.PointLight(0xffffff);
     camera.add(light);
     const ambientLight = new THREE.AmbientLight(0xa0a6a6); // soft blue-green light
@@ -30,8 +28,4 @@ function refreshMap() {
 
 function addToAnimationLoop(animation) {
     animations.push(animation);
-}
-
-function getThreeScene() {
-    return SCENE;
 }

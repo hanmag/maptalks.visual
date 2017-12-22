@@ -20,6 +20,7 @@ xhttp.onreadystatechange = function () {
         const maxHeight = 200;
         const features = JSON.parse(this.responseText);
         const materialDic = {}; // index by height
+        const scene = threeLayer.getScene();
 
         features.forEach(function (g) {
             g.type = 'Feature';
@@ -33,9 +34,9 @@ xhttp.onreadystatechange = function () {
                 materialDic[g.height] = material;
             const mesh = threeLayer.toExtrudeMesh(geo, g.height, material, true);
             if (Array.isArray(mesh)) {
-                SCENE.add.apply(SCENE, mesh);
+                scene.add.apply(scene, mesh);
             } else {
-                SCENE.add(mesh);
+                scene.add(mesh);
             }
         });
         refreshMap();
