@@ -13,6 +13,15 @@
             width: 100%;
             background: #111;
         }
+
+        #tip {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 12px;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
     </style>
     <script type="text/javascript" src="./lib/three.min.js"></script>
     <script type="text/javascript" src='./lib/mapbox-gl.js'></script>
@@ -27,7 +36,10 @@
 
 <body>
     <div id="map"></div>
+    <span id="tip"></span>
     <script>
+        const tip = document.getElementById('tip');
+
         mapboxgl.accessToken =
             'pk.eyJ1Ijoid2FuZ2p1ZTExOTkiLCJhIjoiY2l3NzJsMXZ6MDA1MDJvcGVvOXZ5aGtxNiJ9.6Md6VaUCF6RJPQT5d95Lhw';
 
@@ -57,6 +69,11 @@
                     easing: 'in'
                 });
             }
+        });
+
+        document.addEventListener('mousemove', function (e) {
+            const coord = map.containerPointToCoordinate(new maptalks.Point(e.clientX, e.clientY), map.getZoom());
+            tip.innerText = coord.x.toFixed(4) + ', ' + coord.y.toFixed(4);
         });
 
         setTimeout(() => {

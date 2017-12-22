@@ -5,7 +5,15 @@ const threeLayer = new maptalks.ThreeLayer('t', {
     forceRenderOnZooming: true
 }).addTo(map);
 
-var SCENE = null;
+const animations = [];
+
+window.animationLoop = () => {
+    animations.forEach(anim => {
+        anim.call();
+    });
+}
+
+let SCENE = null;
 
 threeLayer.prepareToDraw = function (gl, scene, camera) {
     SCENE = scene;
@@ -18,4 +26,12 @@ threeLayer.prepareToDraw = function (gl, scene, camera) {
 
 function refreshMap() {
     map.setBearing(map.getBearing() + 0.001);
+}
+
+function addToAnimationLoop(animation) {
+    animations.push(animation);
+}
+
+function getThreeScene() {
+    return SCENE;
 }
