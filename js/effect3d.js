@@ -1,5 +1,5 @@
 function drawElements() {
-    if (!SCENE) {
+    if (!getThreeScene()) {
         console.warn('three.js scene is empty');
         return;
     }
@@ -9,15 +9,15 @@ function drawElements() {
     const hemi_sphere_material = new THREE.MeshPhongMaterial({
         color: 0x886666,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.35,
         clippingPlanes: [new THREE.Plane(new THREE.Vector3(0, 0, -1))]
     });
     const hemi_sphere = new THREE.Mesh(hemi_sphere_geometry, hemi_sphere_material);
     hemi_sphere.position.set(-27589453.947005168, -16645787.262404276, 0);
-    SCENE.add(hemi_sphere);
+    getThreeScene().add(hemi_sphere);
 
     // circle-plane
-    const circle_plane_geometry = new THREE.CircleGeometry(1600, 32);
+    const circle_plane_geometry = new THREE.CircleGeometry(1600, 64);
     const circle_plane_material = new THREE.MeshBasicMaterial({
         color: 0x220000,
         opacity: 0.1,
@@ -25,7 +25,7 @@ function drawElements() {
     });
     const circle_plane = new THREE.Mesh(circle_plane_geometry, circle_plane_material);
     circle_plane.position.set(-27589453.947005168, -16645787.262404276, 0);
-    SCENE.add(circle_plane);
+    getThreeScene().add(circle_plane);
 
     // add spot light
     const spotLightGeometry = new THREE.CylinderGeometry(0.1, 1.5, 5, 32 * 2, 20, true);
