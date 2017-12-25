@@ -15,9 +15,9 @@ const skyMaterial = (function () {
     // texture.repeat.set(10, 20);
     return new THREE.MeshBasicMaterial({
         // map: texture,
-        color: 0x121215,
+        color: 0x090914,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.97,
         side: THREE.BackSide,
         clippingPlanes: [new THREE.Plane(new THREE.Vector3(0, 0, -1))]
     });
