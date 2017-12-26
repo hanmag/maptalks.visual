@@ -1,0 +1,4 @@
+.mapboxgl-ctrl-attrib a,
+a.mapboxgl-ctrl-logo {
+    display: none;
+}
