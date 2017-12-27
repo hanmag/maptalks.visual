@@ -1,0 +1,18 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# 创建的文件:25.12.2017 10:28:36
+
+newmtl chuzu04
+	Ns 24.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1980 0.1980 0.1980
+	Ke 0.0000 0.0000 0.0000
+	map_Ka maps\chuzu04.jpg
+	map_Kd maps\chuzu04.jpg
+	map_bump maps\chuzu04.jpg
+	bump maps\chuzu04.jpg
