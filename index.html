@@ -3,6 +3,7 @@
 
 <head>
     <title>visualize demo</title>
+    <link type="text/css" rel="stylesheet" href="./css/reset.css" />
     <link type="text/css" rel="stylesheet" href="./css/maptalks.css" />
     <style>
         html,
@@ -54,7 +55,7 @@
             center: [-73.997927, 40.7085877],
             zoom: 14,
             pitch: 55,
-            maxPitch: 60,
+            maxPitch: 80,
             baseLayer: baseLayer
         });
 
@@ -62,8 +63,8 @@
             if (e.code === 'Space') {
                 map.animateTo({
                     center: [-73.999927, 40.7085877],
-                    zoom: 16,
-                    pitch: 55,
+                    zoom: 17,
+                    pitch: 80,
                     bearing: -60
                 }, {
                     duration: 6000,
@@ -74,7 +75,8 @@
 
         document.addEventListener('mousemove', function (e) {
             const coord = map.containerPointToCoordinate(new maptalks.Point(e.clientX, e.clientY), map.getZoom());
-            tip.innerText = coord.x.toFixed(4) + ', ' + coord.y.toFixed(4);
+            tip.innerText = (coord.x.toFixed(4) + ', ' + coord.y.toFixed(4)) + (tip.attchText ? ', ' + tip.attchText + ', ' :
+                ', ') + map.getPitch().toFixed(0) + ', ' + map.getBearing().toFixed(0);
         });
 
         setTimeout(() => {
