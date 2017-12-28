@@ -8,9 +8,10 @@ function drawElements() {
     // hemi-sphere
     const hemi_sphere_geometry = new THREE.SphereGeometry(1600, 32, 32);
     const hemi_sphere_material = new THREE.MeshPhongMaterial({
-        color: 0x886666,
+        color: 0xaa6666,
         transparent: true,
         opacity: 0.45,
+        shininess: 60,
         clippingPlanes: [new THREE.Plane(new THREE.Vector3(0, 0, -1))]
     });
     const hemi_sphere = new THREE.Mesh(hemi_sphere_geometry, hemi_sphere_material);

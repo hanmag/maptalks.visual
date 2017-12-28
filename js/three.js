@@ -34,7 +34,7 @@ window.animationLoop = () => {
 
     const cameraPosition = threeLayer.getCamera().position;
     tip.attchText = -cameraPosition.z.toFixed(0);
-    updateSkybox(cameraPosition);
+    updateObject3d(cameraPosition);
 
     threeLayer.renderScene();
 }
@@ -48,8 +48,9 @@ threeLayer.prepareToDraw = function (gl, scene, camera) {
     refreshMap();
 };
 
-function updateSkybox(cameraPosition) {
-    const skyRadius = -cameraPosition.z * 5 + (Math.pow(map.getPitch(), 1.4) * 24) - 800;
+function updateObject3d(cameraPosition) {
+    const skyRadius = 500000;//仅根据z
+    console.log(skyRadius);
     skybox.visible = map.getZoom() > 15 && map.getPitch() > 60;
     skybox.geometry = new THREE.CylinderGeometry(skyRadius, skyRadius, 200000, 128);
     skybox.position.x = cameraPosition.x;
