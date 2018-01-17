@@ -33,7 +33,7 @@
     <script type="text/javascript" src="./lib/maptalks.odline.js"></script>
     <script type="text/javascript" src="./loadjs/OBJLoader.js"></script>
     <script type="text/javascript" src="./loadjs/MTLLoader.js"></script>
-	<script type="text/javascript" src="./loadjs/GLTFLoader.js"></script>
+    <script type="text/javascript" src="./loadjs/GLTFLoader.js"></script>
 </head>
 
 <body>
@@ -75,7 +75,8 @@
 
         document.addEventListener('mousemove', function (e) {
             const coord = map.containerPointToCoordinate(new maptalks.Point(e.clientX, e.clientY), map.getZoom());
-            tip.innerText = (coord.x.toFixed(4) + ', ' + coord.y.toFixed(4)) + (tip.attchText ? ', ' + tip.attchText + ', ' :
+            tip.innerText = (coord.x.toFixed(4) + ', ' + coord.y.toFixed(4)) + (tip.attchText ? ', ' + tip.attchText +
+                ', ' :
                 ', ') + map.getPitch().toFixed(0) + ', ' + map.getBearing().toFixed(0);
         });
 
@@ -85,17 +86,20 @@
 
             setTimeout(() => {
                 if (typeof (drawElements) === 'function') drawElements();
+                if (typeof (drawSnow) === 'function') drawSnow();
+                // if (typeof (drawRain) === 'function') drawRain();
             }, 2000);
+
+            setTimeout(() => {
+                if (typeof (drawFire) === 'function') drawFire();
+            }, 4000);
         }, 2000);
-
-        
     </script>
-
     <script type="text/javascript" src="./js/route.js"></script>
     <script type="text/javascript" src="./js/three.js"></script>
     <script type="text/javascript" src="./js/building.js"></script>
     <script type="text/javascript" src="./js/effect3d.js"></script>
-    <!--<script type="text/javascript" src="./js/car.js"></script>-->
+    <script type="text/javascript" src="./js/elements.js"></script>
     <script type="text/javascript" src="./js/gltf.js"></script>
 </body>
 

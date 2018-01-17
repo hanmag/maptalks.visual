@@ -1,3 +1,5 @@
+var hemi_sphere, circle_plane;
+
 function drawElements() {
     const scene = threeLayer.getScene();
     if (!scene) {
@@ -13,7 +15,7 @@ function drawElements() {
         opacity: 0.45,
         clippingPlanes: [new THREE.Plane(new THREE.Vector3(0, 0, -1))]
     });
-    const hemi_sphere = new THREE.Mesh(hemi_sphere_geometry, hemi_sphere_material);
+    hemi_sphere = new THREE.Mesh(hemi_sphere_geometry, hemi_sphere_material);
     hemi_sphere.position.set(-27589453.947005168, -16645787.262404276, 0);
     scene.add(hemi_sphere);
 
@@ -24,7 +26,7 @@ function drawElements() {
         opacity: 0.1,
         side: THREE.BackSide
     });
-    const circle_plane = new THREE.Mesh(circle_plane_geometry, circle_plane_material);
+    circle_plane = new THREE.Mesh(circle_plane_geometry, circle_plane_material);
     circle_plane.position.set(-27589453.947005168, -16645787.262404276, 0);
     scene.add(circle_plane);
 
@@ -34,4 +36,12 @@ function drawElements() {
     // geometry.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 
     refreshMap();
+
+    const effect3dStartTime = Date.now();
+    addToAnimationLoop(function () {
+        // var t = Date.now();
+        // var eclapse = (t - effect3dStartTime) % 1000000;
+        // hemi_sphere.geometry = new THREE.SphereGeometry(1000 + eclapse*0.05, 32, 32);
+        // circle_plane.geometry = new THREE.CircleGeometry(1000 + eclapse*0.05, 64);
+    })
 }
