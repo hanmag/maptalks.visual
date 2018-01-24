@@ -98,59 +98,45 @@ function drawSnow() {
 
 }
 
-function drawRain() {
-    const scene = threeLayer.getScene();
-    if (!scene) {
-        console.warn('three.js scene is empty');
-        return;
-    }
+// function drawRain() {
+//     const scene = threeLayer.getScene();
+//     if (!scene) {
+//         console.warn('three.js scene is empty');
+//         return;
+//     }
 
-    //rain
-    var ammountLines = 2500;
-    var dimension = 400;
-    var lines = [];
-    for (var i = 0; i < ammountLines; i++) {
-        var geometryLines = new THREE.BoxGeometry(0.8, 0.8, 200 * Math.random());
-        var materialLines = new THREE.MeshPhongMaterial({
-            color: 0xffffff,
-            shininess: 500,
-        });
-        var line = new THREE.Mesh(geometryLines, materialLines);
-        scene.add(line);
-        lines.push(line);
-        line.rotation.z = Math.random() * 360;
-        line.position.x = -27591660.302791115 + Math.random() * (dimension * 15) - (dimension / 2 * 15);
-        line.position.y = -16643057.24135378 + Math.random() * (dimension * 15) - (dimension / 2 * 15);
-        line.position.z = (-3000 * Math.random()) + 150;
-        line.modifier = Math.random();
-    }
+//     //rain
+//     var ammountLines = 2500;
+//     var dimension = 400;
+//     var lines = [];
+//     for (var i = 0; i < ammountLines; i++) {
+//         var geometryLines = new THREE.BoxGeometry(0.8, 0.8, 200 * Math.random());
+//         var materialLines = new THREE.MeshPhongMaterial({
+//             color: 0xffffff,
+//             shininess: 500,
+//         });
+//         var line = new THREE.Mesh(geometryLines, materialLines);
+//         scene.add(line);
+//         lines.push(line);
+//         line.rotation.z = Math.random() * 360;
+//         line.position.x = -27591660.302791115 + Math.random() * (dimension * 15) - (dimension / 2 * 15);
+//         line.position.y = -16643057.24135378 + Math.random() * (dimension * 15) - (dimension / 2 * 15);
+//         line.position.z = (-3000 * Math.random()) + 150;
+//         line.modifier = Math.random();
+//     }
 
-    var counter = 0;
-    addToAnimationLoop(function () {
-        counter += 0.01;
-        for (var i = lines.length - 1; i >= 0; i--) {
-            lines[i].position.z += 30 * lines[i].modifier;
-            if (lines[i].position.z > 3000) {
-                lines[i].position.z = -3000;
-            }
-        }
-    });
-}
+//     var counter = 0;
+//     addToAnimationLoop(function () {
+//         counter += 0.01;
+//         for (var i = lines.length - 1; i >= 0; i--) {
+//             lines[i].position.z += 30 * lines[i].modifier;
+//             if (lines[i].position.z > 3000) {
+//                 lines[i].position.z = -3000;
+//             }
+//         }
+//     });
+// }
 
-function drawElements2() {
-    // var plGeometry = new THREE.PlaneBufferGeometry(10000,10000);
-    // var water = new THREE.Mesh(plGeometry,new THREE.MeshBasicMaterial());
-    // water.position.set(-27589453.947005168, -16645787.262404276, 0);
-    // scene.add(water);
-
-    // addToAnimationLoop(function () {
-    //     var time = performance.now() * 0.001;
-    //     water.material.uniforms.time.value += 1.0 / 60.0;
-    //     water.material.uniforms.size.value = parameters.size;
-    //     water.material.uniforms.distortionScale.value = parameters.distortionScale;
-    //     water.material.uniforms.alpha.value = parameters.alpha;
-    // });
-}
 
 function drawFire() {
     const scene = threeLayer.getScene();
