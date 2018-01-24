@@ -50,7 +50,7 @@ threeLayer.prepareToDraw = function (gl, scene, camera) {
 
 function updateObject3d(cameraPosition) {
     const skyRadius = 500000;//仅根据z
-    console.log(skyRadius);
+    // console.log(skyRadius);
     skybox.visible = map.getZoom() > 15 && map.getPitch() > 60;
     skybox.geometry = new THREE.CylinderGeometry(skyRadius, skyRadius, 200000, 128);
     skybox.position.x = cameraPosition.x;
