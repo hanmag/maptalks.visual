@@ -146,54 +146,51 @@ function drawFire() {
         return;
     }
 
-    // var textureLoader = new THREE.TextureLoader();
-    // // var sprite1 = textureLoader.load("textures/firetex.png");
+    // var axesHelper = new THREE.AxesHelper(500000000);
+    // scene.add(axesHelper);
+
     // var fireTex = THREE.ImageUtils.loadTexture("./firetex.png");
-    // var wireframeMat = new THREE.MeshBasicMaterial({
-    //     color: new THREE.Color(0xffffff),
-    //     wireframe: true
-    // });
+    var textureLoader = new THREE.TextureLoader();
+    var fireTex = textureLoader.load("textures/firetex.png");
+    var wireframeMat = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(0xffffff),
+        wireframe: true
+    });
 
-    // var fire = new THREE.Fire(fireTex);
-    // // fire.position.set(-27591660.302791115, -16643057.24135378, -500);
-    // fire.position.copy(camera.position);
-    // fire.position.add(new THREE.Vector3(-10000, -30000, 2000));
-    // // fire.rotation.set(1.57, -1.57, 1.57);
-    // var wireframe = new THREE.Mesh(fire.geometry, wireframeMat.clone());
-    // fire.add(wireframe);
-    // wireframe.visible = true;
+    var fire = new THREE.Fire(fireTex);
 
-    // scene.add(fire);
+    var wireframe = new THREE.Mesh(fire.geometry, wireframeMat.clone());
+    fire.add(wireframe);
+    wireframe.visible = false;
+    fire.position.set(-27589453.947005168, -16645787.262404276, 0);
+    fire.rotation.set(-1.57,-1.57,0);
+    scene.add(fire);
 
-    // var controller = {
-    //     speed: 1.0,
-    //     magnitude: 1.3,
-    //     lacunarity: 2.0,
-    //     gain: 0.5,
-    //     noiseScaleX: 1.0,
-    //     noiseScaleY: 2.0,
-    //     noiseScaleZ: 1.0,
-    //     wireframe: false
-    // };
+    var clock = new THREE.Clock();
 
-    // var onUpdateMat = function () {
-    //     fire.material.uniforms.magnitude.value = controller.magnitude;
-    //     fire.material.uniforms.lacunarity.value = controller.lacunarity;
-    //     fire.material.uniforms.gain.value = controller.gain;
-    //     fire.material.uniforms.noiseScale.value = new THREE.Vector4(
-    //         controller.noiseScaleX,
-    //         controller.noiseScaleY,
-    //         controller.noiseScaleZ,
-    //         0.3
-    //     );
-    // };
+    var controller = {
+        speed: 1.0,
+        magnitude: 1.3,
+        lacunarity: 2.0,
+        gain: 0.5,
+        noiseScaleX: 1.0,
+        noiseScaleY: 2.0,
+        noiseScaleZ: 1.0,
+    };
 
-    // onUpdateMat();
+    fire.material.uniforms.magnitude.value = controller.magnitude;
+    fire.material.uniforms.lacunarity.value = controller.lacunarity;
+    fire.material.uniforms.gain.value = controller.gain;
+    fire.material.uniforms.noiseScale.value = new THREE.Vector4(
+        controller.noiseScaleX,
+        controller.noiseScaleY,
+        controller.noiseScaleZ,
+        0.3
+    );
 
-    // var clock = new THREE.Clock();
-    // addToAnimationLoop(function () {
-    //     var delta = clock.getDelta();
-    //     var t = clock.elapsedTime * controller.speed;
-    //     fire.update(t);
-    // });
+    addToAnimationLoop(function () {
+        var delta = clock.getDelta();
+        var t = clock.elapsedTime * controller.speed;
+        fire.update(t);
+    });
 }
