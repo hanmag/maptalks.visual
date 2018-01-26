@@ -146,15 +146,15 @@ function drawFire() {
         return;
     }
 
-    // var axesHelper = new THREE.AxesHelper(500000000);
-    // scene.add(axesHelper);
+    var axesHelper = new THREE.AxesHelper(500000000);
+    scene.add(axesHelper);
 
     // var fireTex = THREE.ImageUtils.loadTexture("./firetex.png");
     var textureLoader = new THREE.TextureLoader();
     var fireTex = textureLoader.load("textures/firetex.png");
     var wireframeMat = new THREE.MeshBasicMaterial({
         color: new THREE.Color(0xffffff),
-        wireframe: true
+        wireframe: false
     });
 
     var fire = new THREE.Fire(fireTex);
@@ -162,8 +162,8 @@ function drawFire() {
     var wireframe = new THREE.Mesh(fire.geometry, wireframeMat.clone());
     fire.add(wireframe);
     wireframe.visible = false;
-    fire.position.set(-27589453.947005168, -16645787.262404276, 0);
-    fire.rotation.set(-1.57,-1.57,0);
+    fire.position.set(-27588453.947005168, -16645787.262404276, 0);
+
     scene.add(fire);
 
     var clock = new THREE.Clock();
@@ -188,9 +188,19 @@ function drawFire() {
         0.3
     );
 
+    var scale = 500.0;
+    fire.scale.set(scale, scale, scale);
+    fire.translateY(scale/2);
+
     addToAnimationLoop(function () {
         var delta = clock.getDelta();
         var t = clock.elapsedTime * controller.speed;
         fire.update(t);
+
+        if (scale > 1000) return;
+        scale += 2;
+        fire.scale.set(scale, scale, scale);
+        fire.translateY(1);
+
     });
 }

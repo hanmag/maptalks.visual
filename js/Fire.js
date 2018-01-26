@@ -28,7 +28,7 @@ THREE.Fire = function ( fireTex, color ) {
     fireMaterial.uniforms.seed.value = Math.random() * 19.19;
 
     THREE.Mesh.call( this, new THREE.BoxGeometry( 1.0, 1.0, 1.0 ), fireMaterial );
-    this.scale.set(1000.0, 1000.0, 1000.0);
+    this.rotateX(-Math.PI/2);
 };
 
 THREE.Fire.prototype = Object.create( THREE.Mesh.prototype );
