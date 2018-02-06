@@ -31,9 +31,10 @@
     <script type="text/javascript" src="./lib/maptalks.biglayer.js"></script>
     <script type="text/javascript" src="./lib/maptalks.mapboxgl.js"></script>
     <script type="text/javascript" src="./lib/maptalks.odline.js"></script>
-    <script type="text/javascript" src="./loadjs/OBJLoader.js"></script>
-    <script type="text/javascript" src="./loadjs/MTLLoader.js"></script>
+    <!-- <script type="text/javascript" src="./loadjs/OBJLoader.js"></script> -->
+    <!-- <script type="text/javascript" src="./loadjs/MTLLoader.js"></script> -->
     <script type="text/javascript" src="./loadjs/GLTFLoader.js"></script>
+    <script type="text/javascript" src="./lib/SPE.js"></script>
 </head>
 
 <body>
@@ -85,10 +86,14 @@
             if (typeof (loadBuildings) === 'function') loadBuildings();
 
             setTimeout(() => {
-                if (typeof (drawElements) === 'function') drawElements();
+                // if (typeof (drawElements) === 'function') drawElements();
+                // 模拟天气
                 // if (typeof (drawSnow) === 'function') drawSnow();
                 // if (typeof (drawRain) === 'function') drawRain();
-                if (typeof (drawFire) === 'function') drawFire();
+                // if (typeof (drawFog) === 'function') drawFog();
+
+                // if (typeof (drawOcean) === 'function') drawOcean();
+                
             }, 2000);
 
         }, 2000);
@@ -96,12 +101,11 @@
     <script type="text/javascript" src="./js/route.js"></script>
     <script type="text/javascript" src="./js/three.js"></script>
     <script type="text/javascript" src="./js/building.js"></script>
-    <script type="text/javascript" src="./js/FireShader.js"></script>
     <script type="text/javascript" src="./js/Fire.js"></script>
-    <script type="text/javascript" src="./js/effect3d.js"></script>
+    <script type="text/javascript" src="./js/water-material.js"></script>
     <script type="text/javascript" src="./js/elements.js"></script>
-    <script type="text/javascript" src="./js/rain.js"></script>
-    <script type="text/javascript" src="./js/gltf.js"></script>
+    <script type="text/javascript" src="./js/underground.js"></script>
+    <script type="text/javascript" src="./js/gltf_car.js"></script>
 </body>
 
 </html>
