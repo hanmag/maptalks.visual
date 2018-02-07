@@ -46,7 +46,8 @@ const skybox = new THREE.Mesh(new THREE.CylinderGeometry(150000, 150000, 200000,
 skybox.fixed = true;
 skybox.rotation.x = Math.PI / 2;
 
-
+const stats = new Stats();
+document.getElementById('map').appendChild(stats.dom);
 
 window.animationLoop = () => {
     animations.forEach(anim => {
@@ -57,6 +58,7 @@ window.animationLoop = () => {
     tip.attchText = -cameraPosition.z.toFixed(0);
     updateSkybox(cameraPosition);
 
+    stats.update();
     threeLayer.renderScene();
 }
 

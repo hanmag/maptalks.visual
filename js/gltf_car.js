@@ -67,7 +67,7 @@
 	//     }
 	// }
 
-	setTimeout(onload, 2000);
+	// setTimeout(onload, 2000);
 
 	var sdjl = new maptalks.VectorLayer('wewe').addTo(map);
 	new maptalks.Marker([-74.0066, 40.70768]).addTo(sdjl);

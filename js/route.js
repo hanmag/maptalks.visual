@@ -67,3 +67,85 @@ function loadRoutes() {
     xhttp3.open("GET", "./data/deck_trips.json", true);
     xhttp3.send();
 }
+
+function loadTraffic() {
+    const scene = threeLayer.getScene();
+    const camera = threeLayer.getCamera();
+    if (!scene) {
+        console.warn('three.js scene is empty');
+        return;
+    }
+    var resolution = new THREE.Vector2(window.innerWidth, window.innerHeight);
+
+    var materials = [];
+    [0xff0000, 0xffff00, 0x00ff00].forEach(function (color) {
+        materials.push(new MeshLineMaterial({
+            useMap: false,
+            color: new THREE.Color(color),
+            opacity: 1,
+            resolution: resolution,
+            sizeAttenuation: false,
+            lineWidth: 4,
+            near: camera.near,
+            far: camera.far,
+            depthWrite: false,
+            depthTest: true,
+            alphaTest: false,
+            transparent: true,
+            side: THREE.DoubleSide
+        }));
+    });
+
+
+    var group = new THREE.Group();
+    group.position.set(-27591426, -16661503, 0);
+    for (var k = 0; k < testTrace2.length; k++) {
+        var rt = testTrace2[k];
+        for (var i = 0; i < rt.length - 1; i++) {
+            var v1 = threeLayer.coordinateToVector3(new maptalks.Coordinate(rt[i]));
+            var v2 = threeLayer.coordinateToVector3(new maptalks.Coordinate(rt[i + 1]));
+            var g = new MeshLine();
+            var geometry = new THREE.Geometry();
+
+            geometry.vertices.push(new THREE.Vector3(v1.x + 27591426, v1.y + 16661503, 0),
+                new THREE.Vector3(v2.x + 27591426, v2.y + 16661503, 0));
+            g.setGeometry(geometry);
+
+            var mesh = new THREE.Mesh(g.geometry, materials[Math.floor(Math.random() * 3)]);
+            group.add(mesh);
+        }
+    }
+
+    // var rt = testTrace2[0];
+    // for (var i = 0; i < 50; i++) {
+    //     var v1 = threeLayer.coordinateToVector3(new maptalks.Coordinate(rt[i]));
+    //     var v2 = threeLayer.coordinateToVector3(new maptalks.Coordinate(rt[i + 1]));
+    //     var g = new MeshLine();
+    //     var geometry = new THREE.Geometry();
+
+    //     geometry.vertices.push(new THREE.Vector3(v1.x + 27591426, v1.y + 16661503, 0),
+    //         new THREE.Vector3(v2.x + 27591426, v2.y + 16661503, 0));
+    //     g.setGeometry(geometry);
+
+    //     var mesh = new THREE.Mesh(g.geometry, new MeshLineMaterial({
+    //         map: new THREE.TextureLoader().load("./textures/daohang.jpg"),
+    //         useMap: true,
+    //         opacity: 1,
+    //         // color: new THREE.Color(0x7CCD7C),
+    //         repeat: new THREE.Vector2(3, 1),
+    //         resolution: resolution,
+    //         sizeAttenuation: false,
+    //         lineWidth: 20,
+    //         near: camera.near,
+    //         far: camera.far,
+    //         depthWrite: false,
+    //         depthTest: true,
+    //         alphaTest: false,
+    //         transparent: true,
+    //         side: THREE.DoubleSide
+    //     }));
+    //     group.add(mesh);
+    // }
+
+    scene.add(group);
+}

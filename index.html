@@ -35,6 +35,8 @@
     <!-- <script type="text/javascript" src="./loadjs/MTLLoader.js"></script> -->
     <script type="text/javascript" src="./loadjs/GLTFLoader.js"></script>
     <script type="text/javascript" src="./lib/SPE.js"></script>
+    <script type="text/javascript" src="./lib/THREE.MeshLine.js"></script>
+    <script type="text/javascript" src="./lib/stats.min.js"></script>
 </head>
 
 <body>
@@ -91,11 +93,12 @@
                 // if (typeof (drawRain) === 'function') drawRain();
                 // if (typeof (drawFog) === 'function') drawFog();
 
-                // if (typeof (drawOcean) === 'function') drawOcean();
-                
+                if (typeof (loadTraffic) === 'function') loadTraffic();
+
             }, 2000);
         }, 2000);
     </script>
+    <script type="text/javascript" src="./js/gltf_car.js"></script>
     <script type="text/javascript" src="./js/route.js"></script>
     <script type="text/javascript" src="./js/three.js"></script>
     <script type="text/javascript" src="./js/building.js"></script>
@@ -103,7 +106,7 @@
     <script type="text/javascript" src="./js/water-material.js"></script>
     <script type="text/javascript" src="./js/elements.js"></script>
     <script type="text/javascript" src="./js/underground.js"></script>
-    <script type="text/javascript" src="./js/gltf_car.js"></script>
+    <script type="text/javascript" src="./js/textSprites.js"></script>
 </body>
 
 </html>
