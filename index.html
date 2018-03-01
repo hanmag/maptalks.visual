@@ -97,7 +97,10 @@
                 if (typeof (navigation) === 'function') navigation();
 
                 //烟雾扩散
-                if (typeof (drawSmokeSpread) === 'function') drawSmokeSpread();
+                // if (typeof (drawSmokeSpread) === 'function') drawSmokeSpread();
+
+                //线段报警
+                if (typeof (loadlineeffect) === 'function') loadlineeffect();
 
             }, 2000);
         }, 2000);
@@ -112,6 +115,7 @@
     <script type="text/javascript" src="./js/underground.js"></script>
     <script type="text/javascript" src="./js/textSprites.js"></script>
     <script type="text/javascript" src="./js/particle.js"></script>
+    <script type="text/javascript" src="./js/lineeffect.js"></script>
 </body>
 
 </html>
